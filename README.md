@@ -19,7 +19,8 @@ cd labelling/nDPI/tests
 ```
 
 ## Running the Code
-
-### Creating Flows
-1. Navigate to the flow-splitting directory.
-2. 
+Ensure you have run the installation script and installed the required python packages found in [requirements.txt](requirements.txt).
+### Creating and Labelling Flows
+1. Navigate to the [flow-splitting](flow-splitting) directory and run `./split.sh`.
+2. Navigate to the [labelling](labelling) directory and run `./label.sh`.
+3. Format labels by running `python3 clean_label.csv.py` in the [labelling](labelling) directory.
