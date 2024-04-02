@@ -7,7 +7,6 @@ import os
 import glob
 import matplotlib.pyplot as plt
 from scipy import stats
-from collections import Counter
 
 
 def get_matrix_from_pcap(filename, num_packets, num_bytes, x):
@@ -273,7 +272,7 @@ def main():
     NUMBER_OF_BYTES = 784
     ROW_DIMENSION = 28
     start_time = time.time()
-    labelled_flows = "/home/keegan/Desktop/filtered-flows/"
+    labelled_flows = "../flow-splitting/flows"
     # packet_data, y_train_data = generate_dataset(labelled_flows, "./", NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION)
     # generate_dataset(labelled_flows, NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION, 100, "./generated_output/")
     # npy_file_name = "./4000-packets.npy"
@@ -284,8 +283,7 @@ def main():
     end_time = time.time()
     print('Total time to run: {}'.format(end_time - start_time))
     average_and_display('/home/keegan/Desktop/Taurine/Code/tc-models/datasets/8400-225-5/', './images/225-5', 5, 15 * 15)
-    # For example, to calculate statistics for all labels in a directory and save them to a CSV file, you would call
-    # the function like this:
+    # to calculate statistics for all labels in a directory and save them to a CSV file, you would call the function like this:
     # calculate_statistics('./generated_output', 7, 28 * 28, './stats/stats.csv')
 
 
