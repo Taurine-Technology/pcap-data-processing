@@ -89,21 +89,24 @@ def format_data(dict_of_packets, n_packets, number_of_bytes, row_dimension):
 
 
 def generate_dataset(flow_directory, num_packets, num_bytes, x, num_flows,
-                     output_dir):  # TODO introduce y variable
+                     output_dir, output_file_name, label_folder):  # TODO introduce y variable
     data = {}
     skip = True
-    labels = {'Apple': 0, 'AmazonAWS': 0, 'BitTorrent': 0, 'Cloudflare': 0, 'Cybersec': 0, 'Facebook': 0, 'GMail': 0,
-              'Google': 0, 'GoogleCloud': 0, 'GoogleServices': 0, 'HTTP': 0, 'Instagram': 0,
-              'Microsoft': 0, 'Snapchat': 0, 'Spotify': 0, 'TLS': 0, 'TikTok': 0, 'Twitter': 0,
-              'WhatsApp': 0, 'WhatsAppFiles': 0,
-              'YouTube': 0, 'Unknown': 0, 'Xiaomi': 0}  # 'GoogleDocs': 0,
-    # 'WindowsUpdate': 0,
+    # labels = {'AdultContent': 0, 'Apple': 0, 'AmazonAWS': 0, 'BitTorrent': 0, 'Cloudflare': 0, 'Cybersec': 0, 'DNS': 0,
+    # 'Facebook': 0, 'GMail': 0, 'GoogleDocs': 0,
+    #           'Google': 0, 'GoogleCloud': 0, 'GoogleServices': 0, 'HTTP': 0, 'Instagram': 0,
+    #           'Microsoft': 0, 'Snapchat': 0, 'Spotify': 0, 'TLS': 0, 'TikTok': 0, 'Twitter': 0,
+    #           'WhatsApp': 0, 'WhatsAppFiles': 0,
+    #           'YouTube': 0, 'Unknown': 0, 'Xiaomi': 0}
+    labels = {'AdultContent': 0, 'AmazonAWS': 0, 'BitTorrent': 0, 'Cybersec': 0, 'DNS': 0, 'Facebook': 0, 'Google': 0,
+              'GoogleCloud': 0, 'GoogleServices': 0, 'HTTP': 0, 'Instagram': 0, 'Radius': 0, 'TikTok': 0,
+              'Microsoft': 0, 'WhatsApp': 0, 'YouTube': 0}
     count = 0
-    path = '../labelling/formatted-labels/' + "*.csv"
+    path = label_folder + "*.csv"
     for fname in glob.glob(path):
         print(fname)
         with open(fname) as f_read:
-            with open("100-2023-3.csv", "w") as output:
+            with open(output_file_name, "w") as output:
                 for line in f_read:
                     if skip:  # skip header row
                         skip = False
@@ -198,8 +201,8 @@ def average_and_display(directory_path, save_path, num_packets, packet_size):
             os.makedirs(save_path, exist_ok=True)
 
             # Save the figure
-            plt.savefig(os.path.join(save_path, f'{label}_packet_{packet_num + 1}.png'), dpi=300, bbox_inches='tight', pad_inches = 0)
-
+            plt.savefig(os.path.join(save_path, f'{label}_packet_{packet_num + 1}.png'), dpi=300, bbox_inches='tight',
+                        pad_inches=0)
 
             plt.close()
 
@@ -269,20 +272,16 @@ def calculate_statistics(directory_path, num_packets, packet_size, save_path):
 
 def main():
     NUMBER_OF_PACKETS = 7
-    NUMBER_OF_BYTES = 784
-    ROW_DIMENSION = 28
+    NUMBER_OF_BYTES = 225
+    ROW_DIMENSION = 15
     start_time = time.time()
-    labelled_flows = "../flow-splitting/flows"
-    # packet_data, y_train_data = generate_dataset(labelled_flows, "./", NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION)
-    # generate_dataset(labelled_flows, NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION, 100, "./generated_output/")
-    # npy_file_name = "./4000-packets.npy"
-    # print(npy_file_name)
-    # np.save(npy_file_name, packet_data)
-    # pickle_file_name = "./4000-packets.pkl"
-    # y_train_data.to_pickle(pickle_file_name)
+    labelled_flows = "../flow-splitting/"
+    label_folder = '../labelling/formatted-labels/'
+    generate_dataset(labelled_flows, NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION, 1000, "./dataset/",
+                     "1000-2023-5.csv", label_folder)
     end_time = time.time()
     print('Total time to run: {}'.format(end_time - start_time))
-    average_and_display('/home/keegan/Desktop/Taurine/Code/tc-models/datasets/8400-225-5/', './images/225-5', 5, 15 * 15)
+    # average_and_display('./dataset/', './images/', 5, 15 * 15)
     # to calculate statistics for all labels in a directory and save them to a CSV file, you would call the function like this:
     # calculate_statistics('./generated_output', 7, 28 * 28, './stats/stats.csv')
 
