@@ -1,15 +1,15 @@
 import pandas as pd
 import glob
 import os
-
+from dotenv import load_dotenv
 
 def main():
+    load_dotenv()  # Load environment variables from .env file
     print("Removing bloat from labels file")
-    list_of_files = glob.glob('*.csv')
+    file_folder = os.getenv('FILE_FOLDER', './unformatted')
+    list_of_files = glob.glob(f'{file_folder}/*.csv')
     print(f'Formatting this list  of files: {list_of_files}')
 
-    # latest_file = max(list_of_files, key=os.path.getctime)  # get the latest file
-    # print(latest_file)
     dfs = []
     for f in list_of_files:
         df = pd.read_csv(f)
@@ -25,17 +25,7 @@ def main():
     df = pd.concat(dfs)
     df.drop(['LabelDetails', 'FlowFilePath'], axis=1, inplace=True)
     print("Writing cleaned up labels to file", len(dfs))
-    # df_facebook = df.drop(df[df.label.astype(str) != 'Facebook'].index)[:]
-    # df_youtube = df.drop(df[df['label'] != 'YouTube'].index)[:]
-    # df_tiktok = df.drop(df[df['label'] != 'TikTok'].index)
-    # df_whatsapp_files = df.drop(df[df['label'] != 'WhatsAppFiles'].index)
-    # df_instagram = df.drop(df[df['label'] != 'Instagram'].index)
-    # df_whatsapp = df.drop(df[df['label'] != 'WhatsApp'].index)
-    # df_messenger = df.drop(df[df['label'] != 'Messenger'].index)
-    # df_bittorrent = df.drop(df[df['label'] != 'BitTorrent'].index)[:]
-    # df_final = pd.concat([df_youtube, df_facebook, df_tiktok, df_whatsapp_files, df_instagram, df_whatsapp,
-    #                       df_messenger, df_bittorrent])
-    df.to_csv("formatted-filtered.csv", index=False)
+    df.to_csv("formatted-07-May-2024.csv", index=False)
     print("Done")
 
 
