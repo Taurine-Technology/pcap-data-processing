@@ -25,7 +25,7 @@ def main():
     df = pd.concat(dfs)
     df.drop(['LabelDetails', 'FlowFilePath'], axis=1, inplace=True)
     print("Writing cleaned up labels to file", len(dfs))
-    df.to_csv("formatted-07-May-2024.csv", index=False)
+    df.to_csv("formatted-labels.csv", index=False)
     print("Done")
 
 

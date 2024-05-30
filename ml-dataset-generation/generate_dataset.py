@@ -92,12 +92,7 @@ def generate_dataset(flow_directory, num_packets, num_bytes, x, num_flows,
                      output_dir, output_file_name, label_folder):  # TODO introduce y variable
     data = {}
     skip = True
-    # labels = {'AdultContent': 0, 'Apple': 0, 'AmazonAWS': 0, 'BitTorrent': 0, 'Cloudflare': 0, 'Cybersec': 0, 'DNS': 0,
-    # 'FbookReelStory':0,'Facebook': 0, 'GMail': 0, 'GoogleDocs': 0,
-    #           'Google': 0, 'GoogleCloud': 0, 'GoogleServices': 0, 'HuaweiCloud': 0, 'HTTP': 0, 'Instagram': 0,
-    #           'Microsoft': 0, 'Microsoft365':0,'MS_OneDrive': 0, 'Snapchat': 0, 'Spotify': 0, 'TLS': 0, 'TikTok': 0, 'Twitter': 0,
-    #           'WhatsApp': 0, 'WhatsAppFiles': 0, 'WindowsUpdate': 0,
-    #           'YouTube': 0, 'Unknown': 0, 'Xiaomi': 0}
+    # example labels
     labels = {'AmazonAWS': 0, 'BitTorrent': 0, 'Facebook': 0, 'FbookReelStory': 0, 'Google': 0, 'GoogleServices': 0, 'HTTP': 0,
               'Instagram': 0, 'Microsoft': 0, 'Microsoft365': 0, 'MS_OneDrive': 0, 'Spotify': 0, 'TikTok': 0, 'WhatsApp': 0,
               'YouTube': 0,}
