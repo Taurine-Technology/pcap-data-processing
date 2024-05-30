@@ -20,6 +20,9 @@ cd labelling/nDPI/tests
 
 ## Running the Code
 Ensure you have run the installation script and installed the required python packages found in [requirements.txt](requirements.txt).
+Please read the README files in each directory if you are running into errors and **ensure you set your environment 
+variables in each folder**.
+
 ### Creating and Labelling Flows
 1. Navigate to the [flow-splitting](flow-splitting) directory and run `./split.sh`.
 2. Navigate to the [labelling](labelling) directory and run `./label.sh`.
