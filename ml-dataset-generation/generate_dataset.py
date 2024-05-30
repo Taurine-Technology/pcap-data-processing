@@ -282,9 +282,8 @@ def main():
     label_folder = os.getenv('LABELS_FOLDER', './labels/')
     output_dir = os.getenv('OUTPUT_DIR', './generated_data/')
     output_file_name = os.getenv('OUTPUT_FILE_NAME', './dataset.csv')
-
-
-    generate_dataset(labelled_flows, NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION, 4500, output_dir,
+    num_flows = os.getenv('NUM_FLOWS', 0)
+    generate_dataset(labelled_flows, NUMBER_OF_PACKETS, NUMBER_OF_BYTES, ROW_DIMENSION, int(num_flows), output_dir,
                      output_file_name, label_folder)
 
 
